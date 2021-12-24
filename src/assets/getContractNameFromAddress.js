@@ -1,6 +1,6 @@
 import { fromBech32 } from '@harmony-js/crypto';
 import { isBech32Address } from '@harmony-js/utils';
-import contracts from '../consts/DFK-contracts/contracts';
+import contracts from '../consts/DFK-contact/contracts';
 
 const contractKeys = Object.keys(contracts);
 
