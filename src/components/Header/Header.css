@@ -1,0 +1,20 @@
+.header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  font-size: calc(10px + 2vmin);
+  text-decoration: none;
+  font-family: "Roboto", sans-serif;
+  width: 100%;
+  margin: 20px 20px 0 0;
+}
+
+.header-logo > img {
+  width: 100%;
+  max-width: 300px;
+}
+
+.header-title {
+  font-weight: bold;
+}

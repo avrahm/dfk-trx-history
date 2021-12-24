@@ -1,10 +1,18 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import Transactions from './components/Transactions';
+import { getAddress } from '@harmony-js/crypto';
+import filterDFKTransactions from './assets/filterTransactions';
+import Loading from './components/Loading/Loading';
+import Header from './components/Header/Header';
+import FilterRow from './components/FilterRow/FilterRow';
+import DebugRow from './components/DebugRow';
+import Home from './components/Home/Home';
 
 function App() {
 
   const [currentAccount, setCurrentAccount] = useState("");
+  const testAccount = "one1ydzt66wcuyxwawqxwh3splecf32zw7gsx52hdu";
   const [isLoading, setIsLoading] = useState(false);
 
   const [buttonText, setButtonText] = useState("Connect Wallet");
@@ -31,8 +39,8 @@ function App() {
       if (accounts.length !== 0) {
         const account = accounts[0];
         //set the current account
-        setCurrentAccount(account);
-
+        setCurrentAccount(getAddress(account).bech32);
+        // setCurrentAccount(getAddress(testAccount).bech32);
         setButtonText("Get Data");
         await getData();
       } else {
@@ -65,6 +73,7 @@ function App() {
   }
 
   const getData = async () => {
+    setIsLoading(true);
     try {
       const { ethereum } = window;
 
@@ -84,7 +93,7 @@ function App() {
               "pageSize": 1000,
               "fullTx": true,
               "txType": "ALL",
-              "order": "ASC"
+              "order": "DESC"
             }],
             "id": 1
           })
@@ -95,25 +104,23 @@ function App() {
                 setIsLoading(false);
               } else {
                 setTransactions([]);
-                setIsLoading(true);
+                setIsLoading(false);
               }
             }, (error) => {
               console.log(error);
+
+              setIsLoading(false);
             });
         }
       }
     } catch (error) {
       // console.log(error);
+      setIsLoading(false);
       console.log('catch error');
     }
   }
 
-  const logData = () => {
-    console.log('transactions', transactions);
-    console.log('currentAccount', currentAccount);
-    console.log('status', status);
-    console.log('ethereum', window.ethereum);
-  }
+  const debug = false;
 
   useEffect(() => {
     checkIfWalletIsConnected();
@@ -125,21 +132,21 @@ function App() {
 
   return (
     <div className="App">
-      <br />
-      <br />
-      {currentAccount}
-      <br />
-      <br />
-      {status}
-      <br />
-      <br />
-      <button onClick={!currentAccount ? connectWallet : getData}>{buttonText}</button>
-      <br />
-      <button onClick={logData}>Log Data</button>
-      <br />
-      <Transactions data={transactions} isLoading={isLoading} currentAccount={currentAccount} />
-      <br />
-      <br />
+      <Header currentAccount={currentAccount} isLoading={isLoading} connectWallet={connectWallet} />
+
+      {debug && <DebugRow status={status} currentAccount={currentAccount} connectWallet={connectWallet} getData={getData} buttonText={buttonText} filterDFKTransactions={filterDFKTransactions} transactions={transactions} />}
+      <div className='body'>
+        {currentAccount ? (
+          isLoading ? <Loading /> :
+            (<>
+              <FilterRow />
+              <Transactions data={transactions} isLoading={isLoading} currentAccount={currentAccount} />
+            </>)
+
+        ) : (
+          <Home buttonText={buttonText} connectWallet={connectWallet} />
+        )}
+      </div>
     </div>
   );
 }

@@ -1,0 +1,44 @@
+  get token data
+    {
+  token (id: "0x72cb10c6bfa5624dd07ef608027e366bd690048f") {
+            id
+            symbol
+            tokenDayData (first: 1, orderBy: date, orderDirection: desc) {
+                priceUSD
+                totalLiquidityUSD
+            }
+        }  
+    
+  }
+
+//token data for avax and jewel
+  {
+  myAVAXQuery: tokens(where: {symbol: "AVAX"}) {
+    ...myTokenInfo
+  }
+  myJEWELQuery: tokens(where: {symbol: "JEWEL"}) {
+    ...myTokenInfo
+  }
+}
+
+fragment myTokenInfo on Token {
+  id
+  symbol
+  tokenDayData(where: {date: 1639526400}) {
+    date
+    priceUSD
+  }
+}
+
+{
+  token(id: "0x72cb10c6bfa5624dd07ef608027e366bd690048f") {
+    id
+    name
+    symbol
+    tokenDayData(orderBy: date, orderDirection: desc) {
+      priceUSD
+      date
+    }
+  }
+}
+

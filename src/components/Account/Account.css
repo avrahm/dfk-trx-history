@@ -1,0 +1,13 @@
+.account-box {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 150px;
+  height: 30px;
+  background-color: #1b8129;
+  padding: 20px;
+  border-radius: 30px;
+  border: 1px solid #25e73f;
+}

@@ -1,26 +1,28 @@
+import filterDFKTransactions from '../assets/filterTransactions';
 import TransactionRow from './TransactionRow';
 
-function Transactions({ data, isLoading }) {
-    console.log(data);
+function Transactions({ data, isLoading, currentAccount }) {
+    const filteredData = filterDFKTransactions(data)
     return (
-        <table>
+        <table className='table'>
             <thead>
                 <tr>
-                    <th>Time</th>
-                    <th>Transaction Type</th>
-                    <th>To</th>
-                    <th>From</th>
-                    <th>Quantity</th>
-                    <th>Price</th>
-                    <th>Fees</th>
-                    <th>Total</th>
-                    <th>View on Harmony</th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                    <th scope="col">Time</th>
+                    {/* <th scope="col">Transaction Type</th> */}
+                    <th scope="col">To</th>
+                    <th scope="col">From</th>
+                    <th scope="col">Method</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Fees</th>
+                    {/* <th scope="col">Total</th> */}
                 </tr>
             </thead>
             <tbody>
-                {!isLoading && data.map((transaction, index) => {
+                {!isLoading && filteredData.map((transaction, index) => {
                     return (
-                        <TransactionRow key={index} transaction={transaction} />
+                        <TransactionRow key={index} transaction={transaction} currentAccount={currentAccount} />
                     )
                 })}
             </tbody>
