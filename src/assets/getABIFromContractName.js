@@ -1,17 +1,17 @@
 
-import Bank from '../consts/DFK-contracts/abi/Bank.json';
-import ERC20 from '../consts/DFK-contracts/abi/ERC20.json';
-import ERC721 from '../consts/DFK-contracts/abi/ERC721.json';
-import HeroSale from '../consts/DFK-contracts/abi/HeroSale.json';
-import HeroSummoningUpgradeable from '../consts/DFK-contracts/abi/HeroSummoningUpgradeable.json';
-import MasterGardener from '../consts/DFK-contracts/abi/MasterGardener.json';
-import MeditationCircles from '../consts/DFK-contracts/abi/MeditationCircle.json';
-import QuestCore from '../consts/DFK-contracts/abi/QuestCoreV2.json';
-import SaleAuction from '../consts/DFK-contracts/abi/SaleAuction.json';
-import UniswapV2Router02 from '../consts/DFK-contracts/abi/UniswapV2Factory.json';
-import Profiles from '../consts/DFK-contracts/abi/Profiles.json';
-import Hero from '../consts/DFK-contracts/abi/Hero.json';
-import Crystals from '../consts/DFK-contracts/abi/Crystals.json';
+import Bank from '../consts/DFK-contract/abi/Bank.json';
+import ERC20 from '../consts/DFK-contract/abi/ERC20.json';
+import ERC721 from '../consts/DFK-contract/abi/ERC721.json';
+import HeroSale from '../consts/DFK-contract/abi/HeroSale.json';
+import HeroSummoningUpgradeable from '../consts/DFK-contract/abi/HeroSummoningUpgradeable.json';
+import MasterGardener from '../consts/DFK-contract/abi/MasterGardener.json';
+import MeditationCircles from '../consts/DFK-contract/abi/MeditationCircle.json';
+import QuestCore from '../consts/DFK-contract/abi/QuestCoreV2.json';
+import SaleAuction from '../consts/DFK-contract/abi/SaleAuction.json';
+import UniswapV2Router02 from '../consts/DFK-contract/abi/UniswapV2Factory.json';
+import Profiles from '../consts/DFK-contract/abi/Profiles.json';
+import Hero from '../consts/DFK-contract/abi/Hero.json';
+import Crystals from '../consts/DFK-contract/abi/Crystals.json';
 
 function isQuest(contractName) {
     const questCoreArr =
