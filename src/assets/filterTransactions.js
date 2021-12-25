@@ -1,5 +1,5 @@
 import { fromBech32, getAddress } from '@harmony-js/crypto';
-import contracts from '../consts/DFK-contact/contracts';
+import contracts from './DFK-contracts/contracts';
 
 const contractValues = Object.values(contracts);
 const contractsInOne = contractValues.map(contract => getAddress(contract).bech32);
