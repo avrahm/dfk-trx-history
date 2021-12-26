@@ -1,4 +1,5 @@
 import Bank from './DFK-contracts/abi/Bank.json';
+import Banker from './DFK-contracts/abi/Banker.json';
 import ERC20 from './DFK-contracts/abi/ERC20.json';
 import ERC721 from './DFK-contracts/abi/ERC721.json';
 import HeroSale from './DFK-contracts/abi/HeroSale.json';
@@ -14,7 +15,7 @@ import Crystals from './DFK-contracts/abi/Crystals.json';
 
 function isQuest(contractName) {
     const questCoreArr =
-        ['QuestCoreV2', 'Ambertaffy', 'Darkweed', 'Goldvein', 'Ragweed', 'Redleaf', 'Rockroot', 'SwiftThistle', 'Bloater', 'Ironscale', 'Lanterneye', 'Redgill', 'Sailfish', 'Shimmerskin', 'Silverfin', 'ShvasRune', 'BluePetEgg', 'GreyPetEgg', 'GoldenEgg', 'GaiasTears'];
+        ['QuestCoreV2', 'Ambertaffy', 'Darkweed', 'Goldvein', 'Ragweed', 'Redleaf', 'Rockroot', 'SwiftThistle', 'Bloater', 'Ironscale', 'Lanterneye', 'Redgill', 'Sailfish', 'Shimmerskin', 'Silverfin', 'ShvasRune', 'BluePetEgg', 'GreyPetEgg', 'GoldenEgg', 'GaiasTears', 'DFKGold'];
 
     if (questCoreArr.includes(contractName)) {
         return true;
@@ -28,6 +29,9 @@ function getABIFromContractName(contractName) {
 
     let contractABI = null;
     switch (contract) {
+        case 'Banker':
+            contractABI = Banker;
+            break;
         case 'Bank':
             contractABI = Bank;
             break;

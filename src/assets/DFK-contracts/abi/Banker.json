@@ -1,0 +1,241 @@
+[
+  {
+    "stateMutability": "nonpayable",
+    "type": "constructor",
+    "inputs": [
+      {
+        "internalType": "address",
+        "type": "address",
+        "name": "_factory"
+      },
+      {
+        "name": "_bank",
+        "internalType": "address",
+        "type": "address"
+      },
+      {
+        "name": "_govToken",
+        "type": "address",
+        "internalType": "address"
+      },
+      {
+        "internalType": "address",
+        "type": "address",
+        "name": "_weth"
+      }
+    ]
+  },
+  {
+    "inputs": [
+      {
+        "name": "token",
+        "indexed": true,
+        "type": "address",
+        "internalType": "address"
+      },
+      {
+        "type": "address",
+        "name": "bridge",
+        "internalType": "address",
+        "indexed": true
+      }
+    ],
+    "type": "event",
+    "anonymous": false,
+    "name": "LogBridgeSet"
+  },
+  {
+    "anonymous": false,
+    "type": "event",
+    "name": "LogConvert",
+    "inputs": [
+      {
+        "indexed": true,
+        "name": "server",
+        "internalType": "address",
+        "type": "address"
+      },
+      {
+        "type": "address",
+        "internalType": "address",
+        "name": "token0",
+        "indexed": true
+      },
+      {
+        "type": "address",
+        "name": "token1",
+        "internalType": "address",
+        "indexed": true
+      },
+      {
+        "type": "uint256",
+        "internalType": "uint256",
+        "name": "amount0",
+        "indexed": false
+      },
+      {
+        "name": "amount1",
+        "indexed": false,
+        "internalType": "uint256",
+        "type": "uint256"
+      },
+      {
+        "name": "amountGovToken",
+        "indexed": false,
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ]
+  },
+  {
+    "inputs": [
+      {
+        "name": "previousOwner",
+        "internalType": "address",
+        "indexed": true,
+        "type": "address"
+      },
+      {
+        "name": "newOwner",
+        "internalType": "address",
+        "type": "address",
+        "indexed": true
+      }
+    ],
+    "type": "event",
+    "anonymous": false,
+    "name": "OwnershipTransferred"
+  },
+  {
+    "stateMutability": "view",
+    "type": "function",
+    "outputs": [
+      {
+        "type": "address",
+        "name": "",
+        "internalType": "address"
+      }
+    ],
+    "inputs": [],
+    "name": "bank"
+  },
+  {
+    "outputs": [
+      {
+        "type": "address",
+        "internalType": "contract IUniswapV2Factory",
+        "name": ""
+      }
+    ],
+    "type": "function",
+    "inputs": [],
+    "name": "factory",
+    "stateMutability": "view"
+  },
+  {
+    "inputs": [],
+    "type": "function",
+    "stateMutability": "view",
+    "outputs": [
+      {
+        "name": "",
+        "type": "address",
+        "internalType": "address"
+      }
+    ],
+    "name": "owner"
+  },
+  {
+    "stateMutability": "nonpayable",
+    "name": "renounceOwnership",
+    "type": "function",
+    "outputs": [],
+    "inputs": []
+  },
+  {
+    "name": "transferOwnership",
+    "inputs": [
+      {
+        "internalType": "address",
+        "type": "address",
+        "name": "newOwner"
+      }
+    ],
+    "outputs": [],
+    "type": "function",
+    "stateMutability": "nonpayable"
+  },
+  {
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "bridge",
+        "type": "address"
+      }
+    ],
+    "name": "bridgeFor",
+    "type": "function",
+    "stateMutability": "view",
+    "inputs": [
+      {
+        "internalType": "address",
+        "type": "address",
+        "name": "token"
+      }
+    ]
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "type": "address",
+        "name": "token"
+      },
+      {
+        "type": "address",
+        "name": "bridge",
+        "internalType": "address"
+      }
+    ],
+    "name": "setBridge",
+    "type": "function",
+    "stateMutability": "nonpayable",
+    "outputs": []
+  },
+  {
+    "outputs": [],
+    "name": "convert",
+    "inputs": [
+      {
+        "type": "address",
+        "name": "token0",
+        "internalType": "address"
+      },
+      {
+        "name": "token1",
+        "type": "address",
+        "internalType": "address"
+      }
+    ],
+    "type": "function",
+    "stateMutability": "nonpayable"
+  },
+  {
+    "name": "convertMultiple",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function",
+    "inputs": [
+      {
+        "type": "address[]",
+        "internalType": "address[]",
+        "name": "token0"
+      },
+      {
+        "type": "address[]",
+        "internalType": "address[]",
+        "name": "token1"
+      }
+    ]
+  }
+]
