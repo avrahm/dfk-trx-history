@@ -3,7 +3,7 @@ import './Loading.css';
 
 function Loading() {
   return (
-    <div style={{ display: 'flex', alignContent: 'center', justifyContent: 'center', width: '100%', height: '100%' }}>
+    <div className="loading-div">
       <img src={dfkLogo} alt="dfk-logo" className="loading-logo" />
     </div>
   )

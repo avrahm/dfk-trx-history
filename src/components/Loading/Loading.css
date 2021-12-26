@@ -17,3 +17,10 @@
   width: 150px;
   animation: pulse 1s linear infinite;
 }
+
+.loading-div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 400px;
+}
