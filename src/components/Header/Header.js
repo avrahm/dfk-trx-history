@@ -4,17 +4,31 @@ import './Header.css';
 
 function Header({ currentAccount, isLoading, setIsLoading, connectWallet }) {
     return (
-        <header className='header'>
-            <div className='header-logo'>
-                <img src={dfkHeaderLogo} alt="defi-kingdoms-logo" />
+        <nav className="navbar navbar-expand-lg navbar-light bg-light">
+            <div className="container-fluid">
+                <a className="navbar-brand" href="https://" target='_self' >
+                    <img src={dfkHeaderLogo} alt="defi-kingdoms-logo" className='header-logo' />
+                </a>
+                <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span className="navbar-toggler-icon"></span>
+                </button>
+                <div className="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li className="nav-item">
+                            <span className="nav-link">Transaction History</span>
+                        </li>
+                        <li className="nav-item">
+                            <a className="nav-link" href="https://game.defikingdoms.com" target='_self'>Go to the Kingdoms</a>
+                        </li>
+                    </ul>
+                    <form className="d-flex">
+                        {currentAccount ? <Account account={currentAccount} /> : <button className='btn' onClick={connectWallet}>Connect Wallet</button>}
+                    </form>
+                </div>
             </div>
-            <div className='header-title'>
-                <h3>Transaction History</h3>
-            </div>
-            <div className='header-account'>
-                {currentAccount ? <Account account={currentAccount} /> : <button className='btn' onClick={connectWallet}>Connect Wallet</button>}
-            </div>
-        </header>
+        </nav >
+
+
     )
 }
 
