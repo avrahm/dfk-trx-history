@@ -6,9 +6,13 @@ import './FilterRow.css';
 function FilterRow() {
     return (
         <div className="filter-row">
-            <FilterDateOptions />
-            <FilterLocationOptions />
-            <FilterRowButtons />
+            <div className="container">
+                <div className="row">
+                    <FilterDateOptions />
+                    <FilterLocationOptions />
+                    <FilterRowButtons />
+                </div>
+            </div>
         </div>
     )
 }

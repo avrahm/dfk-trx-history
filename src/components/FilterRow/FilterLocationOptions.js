@@ -8,7 +8,7 @@ function FilterLocationOptions() {
     const [title, setTitle] = useState('Select a location');
 
     return (
-        <div className='filter-locations-options'>
+        <div className='filter-locations-options col'>
             <div className="dropdown">
                 <button className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                     {title}

@@ -8,7 +8,7 @@ function FilterRowButtons() {
 
     return (
 
-        <div className="filter-row-buttons">
+        <div className="filter-row-buttons col">
             <button className="btn btn-success" onClick={() => click('Apply')}>Apply</button>
 
             <button className="btn btn-secondary" onClick={() => click('Reset')}>Reset</button>

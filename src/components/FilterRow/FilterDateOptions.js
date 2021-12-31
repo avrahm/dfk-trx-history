@@ -19,10 +19,10 @@ const DateRange = () => {
 
 function FilterDateOptions() {
 
-    const [title, setTitle] = useState('Select an option');
+    const [title, setTitle] = useState('Select a timeframe');
 
     return (
-        <div className='filter-date-options'>
+        <div className='filter-date-options col'>
             <div className="dropdown">
                 <button className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                     {title}
@@ -34,7 +34,11 @@ function FilterDateOptions() {
                     <li onClick={() => setTitle('Custom')}>Custom</li>
                 </ul>
             </div>
-            {title === 'Custom' && <DateRange />}
+            {title === 'Custom' && (
+                <div className='col'>
+                    <DateRange />
+                </div>
+            )}
         </div>
     )
 }
