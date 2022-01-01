@@ -14,7 +14,7 @@ function FilterLocationOptions() {
                     {title}
                 </button>
                 <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                    <li onClick={() => setTitle('Master Gardener')}>Master Gardener</li>
+                    <li onClick={() => setTitle('Marketplace')}>Marketplace</li>
                     <li onClick={() => setTitle('Gardens')}>Gardens</li>
                     <li onClick={() => setTitle('Bank')}>Bank</li>
                     <li onClick={() => setTitle('Tavern')}>Tavern</li>

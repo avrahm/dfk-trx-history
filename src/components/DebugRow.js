@@ -13,18 +13,10 @@ function DebugRow({ status, currentAccount, connectWallet, getData, buttonText, 
 
 
     return (
-        <div style={{ display: 'flex', flexDirection: 'row', textAlign: 'center' }}>
-
-            <br /> 
-            <br />
-            {status}   
-            <br />
-            <br />
-            <button onClick={!currentAccount ? connectWallet : getData}>{buttonText}</button>
-            <br />
-            <button onClick={logData}>Log Data</button>
-            <br />
-            <br />
+        <div style={{ display: 'flex', flexDirection: 'row', alignContent: 'center', justifyContent: 'center' }}>
+            <span> {status}</span>
+            <button className='btn btn-sm' onClick={!currentAccount ? connectWallet : getData}>{buttonText}</button>
+            <button className='btn btn-sm' onClick={logData}>Log Data</button>
         </div>
     )
 }
