@@ -3,48 +3,49 @@ import { getAddress } from '@harmony-js/crypto';
 
 import { getContractNameFromAddress, getABIFromContractName } from "./ContractAPI";
 import contracts from '../assets/DFK-contracts/contracts';
-import { hmyv2_getTransactionReceipt } from "./HarmonyAPI";
+import { hmyv2_getTransactionReceipt, hmyv2_getTransactionsHistory } from "./HarmonyAPI";
 
 const contractValues = Object.values(contracts);
 const contractsInOne = contractValues.map(contract => getAddress(contract).bech32);
 
-export async function decodeLogsFromTrxReceipt(transaction, log) {
+export async function decodeLogsFromTrxReceipt(transaction, log = false) {
     let decodedLogs = [];
     if (!transaction) return;
     const contractName = getContractNameFromAddress(transaction.to);
     //can't decode logs from a contract that doesn't have an ABI
     if (!contractName.includes('one')) {
-        try {
-            await hmyv2_getTransactionReceipt(transaction.hash)
-                .then((response) => {
-                    let getAbi = getABIFromContractName(contractName);
-                    if (getAbi) {
-                        abiDecoder.addABI(getAbi);
-                        decodedLogs = abiDecoder.decodeLogs(response.data.result.logs);
-                        log && console.log(decodedLogs);
-                        return decodedLogs;
-                    }
-                }, (error) => {
-                    console.log(error);
-                });
-        } catch (error) {
-            console.log(error);
-        }
+        await hmyv2_getTransactionReceipt(transaction.hash)
+            .then((response) => {
+                let getAbi = getABIFromContractName(contractName);
+                if (getAbi) {
+                    abiDecoder.addABI(getAbi);
+                    decodedLogs = abiDecoder.decodeLogs(response.data.result.logs);
+                    log && console.log(decodedLogs);
+                    return decodedLogs;
+                }
+            }).catch(error => {
+                try {
+                    const method = decodeMethodFromTrx(transaction);
+                    console.log(contractName, method, error);
+                } catch (error) {
+                    console.log(contractName, error);
+                }
+            });
     }
     return decodedLogs;
 }
 
-export function decodeTransaction(trx, log = false) {
+export function decodeMethodFromTrx(trx, log = false) {
     if (!trx) return;
     const contractName = getContractNameFromAddress(trx.to);
     if (!contractName.includes('one')) {
         let getAbi = getABIFromContractName(contractName);
         if (getAbi) {
             abiDecoder.addABI(getAbi);
-            const decodedData = abiDecoder.decodeMethod(trx.input);
-            if (log) console.log(decodedData);
-            if (decodedData === undefined) return;
-            return decodedData.name;
+            const decodedMethod = abiDecoder.decodeMethod(trx.input);
+            if (log) console.log(decodedMethod);
+            if (decodedMethod === undefined) return;
+            return decodedMethod.name;
         }
     }
 }
@@ -60,4 +61,27 @@ export function filterDFKTransactions(trasactions) {
         } else { return null; }
     });
     return filteredTransactions;
+}
+
+export const getTransactions = async (account, debug = false) => {
+    const { ethereum } = window;
+    if (!ethereum) {
+        //if ethereum is not available, then MetaMask is not installed
+        return { data: [], loading: false, message: "MetaMask not installed!", code: 500 };
+    } else {
+        try {
+            if (debug) {
+                const response = await fetch('/testTransactions.json')
+                const data = await response.json();
+                return { data: data, loading: false, message: "Data received!", code: 200 };
+            }
+            else {
+                const response = await hmyv2_getTransactionsHistory(account);
+                const data = await response.data.result.transactions;
+                return { data: data, loading: false, message: "Data received!", code: 200 };
+            }
+        } catch (error) {
+            return { data: [], loading: false, message: "Error getting data!", code: 500 };
+        }
+    }
 }
