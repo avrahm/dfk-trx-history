@@ -1,129 +1,71 @@
 import { useEffect, useState } from 'react';
-import axios from 'axios';
-import Transactions from './components/Transactions';
-import { getAddress } from '@harmony-js/crypto';
-import filterDFKTransactions from './assets/filterTransactions';
-import Loading from './components/Loading/Loading';
+import { Route, Routes, useNavigate } from 'react-router-dom';
+
+//apis
+import { filterDFKTransactions, getTransactions } from './api/TransactionAPI';
+import { checkIfWalletIsConnected } from './api/WalletAPI';
+
+// pages
+import Home from './Pages/Home/Home';
+import Transactions from './Pages/Transactions/Transactions';
+
+// components
 import Header from './components/Header/Header';
-import FilterRow from './components/FilterRow/FilterRow';
 import DebugRow from './components/DebugRow';
-import Home from './components/Home/Home';
+import PrivateRoute from './components/PrivateRoute';
 
 function App() {
+  let navigate = useNavigate();
 
+  const debug = false;
   const [currentAccount, setCurrentAccount] = useState("");
-  const testAccount = "one1ydzt66wcuyxwawqxwh3splecf32zw7gsx52hdu";
-  const [isLoading, setIsLoading] = useState(false);
-
-  const [buttonText, setButtonText] = useState("Connect Wallet");
-
   const [transactions, setTransactions] = useState([]);
-
+  const [isLoading, setIsLoading] = useState(false);
+  const [buttonText, setButtonText] = useState("Connect Wallet");
   const [status, setStatus] = useState("");
-
-  const checkIfWalletIsConnected = async () => {
-    try {
-      // extract ethereum object from the window
-      const { ethereum } = window;
-
-      if (!ethereum) {
-        //if ethereum is not available, then MetaMask is not installed
-        setButtonText("MetaMask not installed!");
-        return;
-      } else {
-        setStatus("Wallet connected!");
-      }
-
-      const accounts = await ethereum.request({ method: "eth_accounts" });
-
-      if (accounts.length !== 0) {
-        const account = accounts[0];
-        //set the current account
-        setCurrentAccount(getAddress(account).bech32);
-        // setCurrentAccount(getAddress(testAccount).bech32);
-        setButtonText("Get Data");
-        await getData();
-      } else {
-        setCurrentAccount("");
-        setStatus("No authorized accounts found");
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  }
 
   const connectWallet = async () => {
     try {
       const { ethereum } = window;
       if (!ethereum) {
         setButtonText("MetaMask not installed!");
-        checkIfWalletIsConnected();
-        return;
       }
-
       const accounts = await ethereum.request({ method: "eth_requestAccounts" });
-
-      setCurrentAccount(accounts[0]);
+      setCurrentAccount(accounts[0])
       checkIfWalletIsConnected();
     } catch (error) {
-      setStatus("Unable to connect wallet! Make sure you're using MetaMask and try again.");
-
       console.log(error);
+      setButtonText("Error connecting wallet");
+      setStatus("Unable to connect wallet! Make sure you're using MetaMask and try again.");
     }
   }
 
-  const getData = async () => {
-    setIsLoading(true);
-    try {
-      const { ethereum } = window;
-
-      if (!ethereum) {
-        //if ethereum is not available, then MetaMask is not installed
-        setButtonText("MetaMask not installed!");
-        return;
-      } else {
-        setStatus("getting data...");
-        if (currentAccount) {
-          axios.post('https://api.harmony.one', {
-            "jsonrpc": "2.0",
-            "method": "hmyv2_getTransactionsHistory",
-            "params": [{
-              "address": currentAccount,
-              "pageIndex": 0,
-              "pageSize": 1000,
-              "fullTx": true,
-              "txType": "ALL",
-              "order": "DESC"
-            }],
-            "id": 1
-          })
-            .then((response) => {
-              !response.data.error ? setStatus("Data received!") : setStatus("Error getting data!");
-              if (!response.data.error) {
-                setTransactions(response.data.result.transactions)
-                setIsLoading(false);
-              } else {
-                setTransactions([]);
-                setIsLoading(false);
-              }
-            }, (error) => {
-              console.log(error);
-
-              setIsLoading(false);
-            });
-        }
+  async function getData() {
+    if (currentAccount) {
+      setIsLoading(true);
+      navigate('/transactions');
+      const { data = [], loading, message, code } = await getTransactions(currentAccount);
+      if (code === 200) {
+        setStatus(message);
+        setTransactions(data);
+        setIsLoading(loading);
       }
-    } catch (error) {
-      // console.log(error);
-      setIsLoading(false);
-      console.log('catch error');
     }
   }
 
-  const debug = false;
+  async function checkWallet() {
+    const { currentAccount, code, message } = await checkIfWalletIsConnected(debug);
+    console.log(code, message);
+    if (code === 200) {
+      setCurrentAccount(currentAccount)
+      setButtonText("Connected");
+      setStatus(message);
+      getData();
+    }
+  }
 
   useEffect(() => {
-    checkIfWalletIsConnected();
+    checkWallet();
   }, []);
 
   useEffect(() => {
@@ -133,20 +75,29 @@ function App() {
   return (
     <div className="App">
       <Header currentAccount={currentAccount} isLoading={isLoading} connectWallet={connectWallet} />
+      {debug && <DebugRow status={status} currentAccount={currentAccount} connectWallet={connectWallet} buttonText={buttonText} filterDFKTransactions={filterDFKTransactions} transactions={transactions} />}
+      <Routes>
+        <Route exact path="/" element={<Home connectWallet={connectWallet} buttonText={buttonText} />} />
 
-      {debug && <DebugRow status={status} currentAccount={currentAccount} connectWallet={connectWallet} getData={getData} buttonText={buttonText} filterDFKTransactions={filterDFKTransactions} transactions={transactions} />}
-      <div className='body'>
-        {currentAccount ? (
-          isLoading ? <Loading /> :
-            (<>
-              <FilterRow />
-              <Transactions data={transactions} isLoading={isLoading} currentAccount={currentAccount} />
-            </>)
+        <Route
+          path="transactions"
+          element={
+            <PrivateRoute currentAccount={currentAccount} >
+              <Transactions currentAccount={currentAccount} isLoading={isLoading} status={status} connectWallet={connectWallet} buttonText={buttonText} filterDFKTransactions={filterDFKTransactions} transactions={transactions} />
+            </PrivateRoute>
+          }
+        />
 
-        ) : (
-          <Home buttonText={buttonText} connectWallet={connectWallet} />
-        )}
-      </div>
+        {/* <Route
+          path="taxabletransactions"
+          element={
+            <PrivateRoute currentAccount={currentAccount} >
+              <Transactions currentAccount={currentAccount} status={status} connectWallet={connectWallet} getData={getData} buttonText={buttonText} filterDFKTransactions={filterDFKTransactions} transactions={transactions} />
+            </PrivateRoute>
+          }
+        /> */}
+
+      </Routes>
     </div>
   );
 }
