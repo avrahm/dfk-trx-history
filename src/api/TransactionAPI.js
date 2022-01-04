@@ -26,16 +26,18 @@ export async function decodeLogsFromTrxReceipt(transaction, log = false) {
             }).catch(error => {
                 try {
                     const method = decodeMethodFromTrx(transaction);
-                    console.log(contractName, method, error);
+                    // console.log(contractName, method, error);
+                    return `No logs found for ${method}`;
                 } catch (error) {
-                    console.log(contractName, error);
+                    // console.log(contractName, error);
+                    return 'No logs found';
                 }
             });
     }
     return decodedLogs;
 }
 
-export function decodeMethodFromTrx(trx, log = false) {
+export function decodeMethodFromTrx(trx, log = false, full = false) {
     if (!trx) return;
     const contractName = getContractNameFromAddress(trx.to);
     if (!contractName.includes('one')) {
@@ -43,8 +45,9 @@ export function decodeMethodFromTrx(trx, log = false) {
         if (getAbi) {
             abiDecoder.addABI(getAbi);
             const decodedMethod = abiDecoder.decodeMethod(trx.input);
-            if (log) console.log(decodedMethod);
+            log && console.log(decodedMethod);
             if (decodedMethod === undefined) return;
+            if (full) return decodedMethod;
             return decodedMethod.name;
         }
     }

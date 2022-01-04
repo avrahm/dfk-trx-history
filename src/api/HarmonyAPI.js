@@ -6,7 +6,8 @@ export function hmyv2_getTransactionReceipt(trxHash) {
         "method": "hmyv2_getTransactionReceipt",
         "params": [trxHash],
         "id": 1
-    });
+    }, { headers: { "Access-Control-Allow-Origin": "*" } }
+    );
 }
 
 export function hmyv2_getTransactionsHistory(address = null, pageIndex = 0, pageSize = 1000, fullTx = true, txType = 'ALL', order = 'DESC') {
@@ -22,5 +23,6 @@ export function hmyv2_getTransactionsHistory(address = null, pageIndex = 0, page
             "order": order
         }],
         "id": 1
-    });
+    }, { headers: { "Access-Control-Allow-Origin": "*" } }
+    );
 }
