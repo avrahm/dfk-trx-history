@@ -10,7 +10,16 @@
   "tags": {},
   "logoURI": "https://firebasestorage.googleapis.com/v0/b/defi-kingdoms.appspot.com/o/tokens%2FJEWEL.png?alt=media",
   "keywords": ["defikingdoms", "default"],
+  "tokenPriceAPI": "https://dfkreport.antonyip.com/token-price-all",
   "tokens": [
+    {
+      "chainId": 1666600000,
+      "address": "0xcf1709ad76a79d5a60210f23e81ce2460542a836",
+      "symbol": "TRANQ",
+      "name": "Tranquil Token",
+      "decimals": 18,
+      "logoURI": "https://firebasestorage.googleapis.com/v0/b/defi-kingdoms.appspot.com/o/tokens%2FJEWEL.png?alt=media"
+    },
     {
       "chainId": 1666600000,
       "address": "0x72Cb10C6bfA5624dD07Ef608027E366bd690048F",
@@ -21,11 +30,75 @@
     },
     {
       "chainId": 1666600000,
+      "address": "0x3a4edcf3312f44ef027acfd8c21382a5259936e7",
+      "symbol": "DFKGold",
+      "name": "DFK Gold",
+      "decimals": 18,
+      "logoURI": "https://firebasestorage.googleapis.com/v0/b/defi-kingdoms.appspot.com/o/tokens%2FJEWEL.png?alt=media"
+    },
+    {
+      "chainId": 1666600000,
       "address": "0x58f1b044d8308812881a1433d9Bbeff99975e70C",
       "symbol": "11INCH",
       "name": "1INCH Token",
       "decimals": 18,
       "logoURI": "https://firebasestorage.googleapis.com/v0/b/defi-kingdoms.appspot.com/o/tokens%2F11INCH.png?alt=media"
+    },
+    {
+      "chainId": 1666600000,
+      "address": "0xeb579ddcd49a7beb3f205c9ff6006bb6390f138f",
+      "symbol": "JEWEL-LP",
+      "name": "JEWEL LP Token",
+      "decimals": 18,
+      "logoURI": "https://firebasestorage.googleapis.com/v0/b/defi-kingdoms.appspot.com/o/tokens%2FJEWEL.png?alt=media"
+    },
+    {
+      "chainId": 1666600000,
+      "address": "0x751606585fcaa73bf92cf823b7b6d8a0398a1c99",
+      "symbol": "JEWEL-LP",
+      "name": "JEWEL LP Token",
+      "decimals": 18,
+      "logoURI": "https://firebasestorage.googleapis.com/v0/b/defi-kingdoms.appspot.com/o/tokens%2FJEWEL.png?alt=media"
+    },
+    {
+      "chainId": 1666600000,
+      "address": "0xeab84868f6c8569e14263a5326ecd62f5328a70f",
+      "symbol": "JEWEL-LP",
+      "name": "JEWEL LP Token",
+      "decimals": 18,
+      "logoURI": "https://firebasestorage.googleapis.com/v0/b/defi-kingdoms.appspot.com/o/tokens%2FJEWEL.png?alt=media"
+    },
+    {
+      "chainId": 1666600000,
+      "address": "0x093956649d43f23fe4e7144fb1c3ad01586ccf1e",
+      "symbol": "JEWEL-LP",
+      "name": "JEWEL LP Token",
+      "decimals": 18,
+      "logoURI": "https://firebasestorage.googleapis.com/v0/b/defi-kingdoms.appspot.com/o/tokens%2FJEWEL.png?alt=media"
+    },
+    {
+      "chainId": 1666600000,
+      "address": "0xb91a0dfa0178500fedc526f26a89803c387772e8",
+      "symbol": "JEWEL-LP",
+      "name": "JEWEL LP Token",
+      "decimals": 18,
+      "logoURI": "https://firebasestorage.googleapis.com/v0/b/defi-kingdoms.appspot.com/o/tokens%2FJEWEL.png?alt=media"
+    },
+    {
+      "chainId": 1666600000,
+      "address": "0xa9ce83507d872c5e1273e745abcfda849daa654f",
+      "symbol": "xJEWEL",
+      "name": "xJEWEL Token",
+      "decimals": 18,
+      "logoURI": "https://firebasestorage.googleapis.com/v0/b/defi-kingdoms.appspot.com/o/tokens%2FJEWEL.png?alt=media"
+    },
+    {
+      "chainId": 1666600000,
+      "address": "0x7f89b5f33138c89fad4092a7c079973c95362d53",
+      "symbol": "JEWEL-LP",
+      "name": "JEWEL LP Token",
+      "decimals": 18,
+      "logoURI": "https://firebasestorage.googleapis.com/v0/b/defi-kingdoms.appspot.com/o/tokens%2FJEWEL.png?alt=media"
     },
     {
       "chainId": 1666600000,
@@ -226,6 +299,150 @@
       "name": "Wrapped Matic",
       "decimals": 18,
       "logoURI": "https://cryptologos.cc/logos/polygon-matic-logo.png?v=014"
+    },
+    {
+      "chainId": 1666600000,
+      "address": "0x70831eE5F8A0434BD2dDB1e45ED24cBca8B41fec",
+      "symbol": "BABYJEWEL",
+      "name": "BABYJEWEL",
+      "decimals": 18,
+      "logoURI": "https://firebasestorage.googleapis.com/v0/b/defi-kingdoms.appspot.com/o/tokens%2FBABYJEWEL.png?alt=media"
+    },
+    {
+      "chainId": 1666600000,
+      "address": "0xc0431Ddcc0D213Bf27EcEcA8C2362c0d0208c6DC",
+      "symbol": "oSWAP",
+      "name": "OpenSwap Token",
+      "decimals": 18,
+      "logoURI": "https://firebasestorage.googleapis.com/v0/b/defi-kingdoms.appspot.com/o/tokens%2FOSWAP.png?alt=media"
+    },
+    {
+      "chainId": 1666600000,
+      "address": "0xEa589E93Ff18b1a1F1e9BaC7EF3E86Ab62addc79",
+      "symbol": "VIPER",
+      "name": "Viper",
+      "decimals": 18,
+      "logoURI": "https://dvwecb5klcqus.cloudfront.net/venomswap/logos/venomswap-128x128.png"
+    },
+    {
+      "chainId": 1666600000,
+      "address": "0x9b68BF4bF89c115c721105eaf6BD5164aFcc51E4",
+      "symbol": "XYA",
+      "name": "Freyala",
+      "decimals": 18,
+      "logoURI": "https://firebasestorage.googleapis.com/v0/b/defi-kingdoms.appspot.com/o/tokens%2FXYA.png?alt=media"
+    },
+    {
+      "chainId": 1666600000,
+      "address": "0xd009b07B4a65CC769379875Edc279961D710362d",
+      "symbol": "RAIN",
+      "name": "Rain Token",
+      "decimals": 18,
+      "logoURI": "https://firebasestorage.googleapis.com/v0/b/defi-kingdoms.appspot.com/o/tokens%2FRAIN.png?alt=media"
+    },
+    {
+      "chainId": 1666600000,
+      "address": "0x3E018675c0Ef63eB361b9EF4bfEa3A3294C74C7b",
+      "symbol": "KURO",
+      "name": "Kuro Shiba",
+      "decimals": 9,
+      "logoURI": "https://firebasestorage.googleapis.com/v0/b/defi-kingdoms.appspot.com/o/tokens%2FKURO.png?alt=media"
+    },
+    {
+      "chainId": 1666600000,
+      "address": "0x4970417a897Cc7ae812b9b8Db34bb44833C26739",
+      "symbol": "COINK",
+      "name": "Piggybankone",
+      "decimals": 18,
+      "logoURI": "https://firebasestorage.googleapis.com/v0/b/defi-kingdoms.appspot.com/o/tokens%2FCOINK.png?alt=media"
+    },
+    {
+      "chainId": 1666600000,
+      "address": "0x6008C8769BFACd92251bA838382e7e5637C7e74D",
+      "symbol": "COSMIC",
+      "name": "Cosmic Coin",
+      "decimals": 9,
+      "logoURI": "https://firebasestorage.googleapis.com/v0/b/defi-kingdoms.appspot.com/o/tokens%2FCOSMIC.png?alt=media"
+    },
+    {
+      "chainId": 1666600000,
+      "address": "0x3e9D32580B0BF3aE72AFCBEbC68710d2Fd9a18F0",
+      "symbol": "bscCAKE",
+      "name": "PancakeSwap Token",
+      "decimals": 18,
+      "logoURI": "https://firebasestorage.googleapis.com/v0/b/defi-kingdoms.appspot.com/o/tokens%2FbscCAKE.png?alt=media"
+    },
+    {
+      "chainId": 1666600000,
+      "address": "0xE7e3C4D1cFc722b45A428736845B6AfF862842a1",
+      "symbol": "1WISE",
+      "name": "Wise Token",
+      "decimals": 18,
+      "logoURI": "https://firebasestorage.googleapis.com/v0/b/defi-kingdoms.appspot.com/o/tokens%2F1WISE.png?alt=media"
+    },
+    {
+      "chainId": 1666600000,
+      "address": "0xa0dc05F84A27FcCBD341305839019aB86576bc07",
+      "symbol": "1YFI",
+      "name": "yearn.finance",
+      "decimals": 18,
+      "logoURI": "https://firebasestorage.googleapis.com/v0/b/defi-kingdoms.appspot.com/o/tokens%2F1YFI.png?alt=media"
+    },
+    {
+      "chainId": 1666600000,
+      "address": "0xBEC775Cb42AbFa4288dE81F387a9b1A3c4Bc552A",
+      "symbol": "1SUSHI",
+      "name": "SushiToken",
+      "decimals": 18,
+      "logoURI": "https://firebasestorage.googleapis.com/v0/b/defi-kingdoms.appspot.com/o/tokens%2F1SUSHI.png?alt=media"
+    },
+    {
+      "chainId": 1666600000,
+      "address": "0x7b9c523d59AeFd362247Bd5601A89722e3774dD2",
+      "symbol": "1SNX",
+      "name": "Synthetix Network Token",
+      "decimals": 18,
+      "logoURI": "https://firebasestorage.googleapis.com/v0/b/defi-kingdoms.appspot.com/o/tokens%2F1SNX.png?alt=media"
+    },
+    {
+      "chainId": 1666600000,
+      "address": "0x34704c70e9eC9fB9A921da6DAAD7D3e19f43c734",
+      "symbol": "1DSLA",
+      "name": "DSLA",
+      "decimals": 18,
+      "logoURI": "https://firebasestorage.googleapis.com/v0/b/defi-kingdoms.appspot.com/o/tokens%2F1DSLA.png?alt=media"
+    },
+    {
+      "chainId": 1666600000,
+      "address": "0x8F0D210bf0b8A3A3E4B1012B21e6974818a35B94",
+      "symbol": "bscWISB",
+      "name": "bscWise Token",
+      "decimals": 18,
+      "logoURI": "https://firebasestorage.googleapis.com/v0/b/defi-kingdoms.appspot.com/o/tokens%2FWISB.png?alt=media"
+    },
+    {
+      "chainId": 1666600000,
+      "address": "0x0159ED2E06DDCD46a25E74eb8e159Ce666B28687",
+      "symbol": "FOX",
+      "name": "FOX Finance",
+      "decimals": 18,
+      "logoURI": "https://cdn.discordapp.com/attachments/886494799320997889/887094958358687754/fox.png"
+    },
+    {
+      "chainId": 1666600000,
+      "address": "0x17fDEdda058d43fF1615cdb72a40Ce8704C2479A",
+      "symbol": "1SUPERBID",
+      "name": "SuperBid",
+      "decimals": 18,
+      "logoURI": "https://superbid.io/static/assets/tokenomics/superbid_logo.svg"
+    },
+    {
+      "chainId": 1666600000,
+      "address": "0xd74433b187cf0ba998ad9be3486b929c76815215",
+      "symbol": "MIS",
+      "name": "Artemis",
+      "decimals": 18,
+      "logoURI": "https://user-images.githubusercontent.com/90807212/136670698-9295534d-504a-4c00-96b6-10b7cc6eac19.png"
     }
   ]
 }
