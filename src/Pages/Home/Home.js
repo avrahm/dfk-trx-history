@@ -18,7 +18,7 @@ function Home({ buttonText, connectWallet, setCurrentAccount }) {
                     <div className="form-floating mb-3">
                         <input type="text" className="form-control" value={walletAddress} id="floatingInput" onChange={(e) => setWalletAddress(e.target.value)}
                             placeholder="0xEx... or one15..." />
-                        <label htmlFor="floatingInput">Wallet Address (0xEx... or one15...)</label>
+                        <label htmlFor="floatingInput">Wallet Address (0x/one)</label>
                     </div>
                 </form>
                 <hr style={{ width: '50%', margin: '30px auto' }} />
