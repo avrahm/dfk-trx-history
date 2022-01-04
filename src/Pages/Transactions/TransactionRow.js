@@ -3,12 +3,18 @@ import moment from 'moment';
 
 import harmonyLogo from '../../assets/images/harmony-logo.png';
 import { decodeLogsFromTrxReceipt, decodeMethodFromTrx } from '../../api/TransactionAPI';
-import { mapLogs, shiftByBigNumber } from '../../api/FormatAPI';
-import { getContractNameFromAddress } from '../../api/ContractAPI';
+import { accountToEllipsis, convertLogsToNote } from '../../api/FormatAPI';
+import { getContractNameFromAddress, getLocationFromContractName } from '../../api/ContractAPI';
+import TransactionDetails from './TransactionDetails';
 
-function TransactionRow({ transaction, currentAccount }) {
+import './Transactions.css'
 
-    const [note, setNote] = useState('');
+function TransactionRow({ transaction, debug }) {
+
+    const [data, setData] = useState([]);
+    const [details, setDetails] = useState([]);
+    const [method, setMethod] = useState('');
+    const [isDetailsReady, setIsDetailsReady] = useState(false);
     // Harmony API returns the transaction
     // NOTES:
     // Need to match the transaction.to and transaction.from to the currentAccount
@@ -16,62 +22,69 @@ function TransactionRow({ transaction, currentAccount }) {
     // Need to match the transaction method from ABI
     // Timestamp is in in seconds, so we need to convert it to a date 
 
-    async function convertLogsToNote(transaction, debug = false) {
-        const contract = getContractNameFromAddress(transaction.to);
-        const method = decodeMethodFromTrx(transaction);
-        const note = await decodeLogsFromTrxReceipt(transaction)
-            .then(async (decodedLogs) => {
-                switch (contract) {
-                    case 'UniswapV2Router02':
-                        switch (method) {
-                            case 'swapExactETHForTokens':
-                                let eachLog = []
-                                // console.log(await mapLogs(decodedLogs));
-                                let allLogs = await mapLogs(decodedLogs)
-                                    .then(async (logs) => {
-                                        if (logs) {
-                                            logs.map((log) => {
-                                                eachLog.push(`${log.from} sent ${log.value} to ${log.to}`);
-                                            })
-                                            return eachLog.join("\r\n");
-                                        }
-                                    })
-                                if (debug) console.log(allLogs.toString());
-                                return allLogs;
-                            // break;
-                            default:
-                                return 'Unknown';
-                        }
-                    default:
-                        return 'Unknown';
-                }
-            }).catch(error => {
-                console.log(error);
-            });
-        return setNote(note);
+    async function getNote() {
+        const { data, code, method } = await convertLogsToNote(transaction);
+        if (code === 200) {
+            setData(data);
+            setDetails(data.details);
+            setIsDetailsReady(true);
+            setMethod(method);
+        }
     }
 
     useEffect(() => {
-        convertLogsToNote(transaction);
+        getNote();
     }, [transaction]);
 
+
     return (
-        <tr>
-            <td className='d-none d-md-table-cell' ><button onClick={() => console.log(transaction)}>Trx</button></td>
-            <td className='d-none d-md-table-cell' ><button onClick={() => decodeMethodFromTrx(transaction, true)}>Decode</button></td>
-            <td className='d-none d-md-table-cell' ><button onClick={() => decodeLogsFromTrxReceipt(transaction, true)}>TrxHsty</button></td>
-            <td>{moment.unix(transaction.timestamp).format('YYYY-MM-DD')}</td>
-            <td>{getContractNameFromAddress(transaction.to) || transaction.to}</td>
-            <td>{decodeMethodFromTrx(transaction)}</td>
-            <td>{shiftByBigNumber(transaction.value)} ONE</td>
-            <td>{note}</td>
-            <td>
-                <a href={`https://explorer.harmony.one/tx/` + transaction.hash}
-                    target='_blank' rel="noreferrer">
-                    <img src={harmonyLogo} alt="harmony-logo" width='30px' height='100%' />
-                </a>
-            </td>
-        </tr>
+        <>
+            <tr>
+                {debug && (
+                    <td className='d-none d-md-table-cell' rowSpan='2'>
+                        <div className="dropdown">
+                            <button className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                                Actions
+                            </button>
+                            <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                <li><button className="dropdown-item" onClick={() => console.log(transaction)}>Trx</button></li>
+                                <li><button className="dropdown-item" onClick={() => decodeMethodFromTrx(transaction, true)}>Decode</button></li>
+                                <li><button className="dropdown-item" onClick={() => decodeLogsFromTrxReceipt(transaction, true)}>TrxHsty</button></li>
+                                <li><button className="dropdown-item" onClick={() => convertLogsToNote(transaction, true)}>Note</button></li>
+                                <li><button className="dropdown-item" onClick={() => console.log(method, details)}>Details</button></li>
+                            </ul>
+                        </div>
+                    </td>
+                )}
+                <td>
+                    <span className='timestamp'>{moment.unix(transaction.timestamp).format('YYYY-MM-DD hh:mm:ss')}</span>
+                    <br />
+                    <span className='moment-ago'>{moment.unix(transaction.timestamp).fromNow()}</span>
+                </td>
+                <td>{getLocationFromContractName(getContractNameFromAddress(transaction.to)) || transaction.to}</td>
+                <td>{decodeMethodFromTrx(transaction)}</td>
+                <td className='d-none d-md-table-cell'>Profit/Loss</td>
+                {/* <td>{(convertTo2Decimal(transaction.gasPrice) * transaction.gas)}</td> */}
+            </tr>
+            <tr>
+                <td colSpan='4'>
+                    <div className='container'>
+                        {isDetailsReady ? <TransactionDetails data={data} details={details} method={method} /> : 'Loading details...'}
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td colSpan='4' className='text-right'>
+                    <div className='d-flex justify-content-end'>
+                        <a href={`https://explorer.harmony.one/tx/` + transaction.hash}
+                            target='_blank' rel="noreferrer">
+                            {/* {accountToEllipsis(transaction.hash)} */}
+                            <button className='btn btn-sm'>View on Harmony <img src={harmonyLogo} alt="harmony-logo" width='20px' height='100%' /></button>
+                        </a>
+                    </div>
+                </td>
+            </tr>
+        </>
     )
 }
 

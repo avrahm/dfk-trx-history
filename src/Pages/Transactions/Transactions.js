@@ -3,14 +3,16 @@ import Loading from '../../components/Loading/Loading';
 import TransactionsTable from './TransactionsTable';
 import './Transactions.css';
 
-function Transactions({ buttonText, connectWallet, isLoading, transactions, currentAccount }) {
+function Transactions({ isLoading, transactions, currentAccount, setTransactions, debug }) {
 
     return (
         <div>
             {isLoading ? <Loading /> :
                 (<>
-                    <FilterRow />
-                    <TransactionsTable data={transactions} isLoading={isLoading} currentAccount={currentAccount} />
+                    <FilterRow setTransactions={setTransactions} transactions={transactions} />
+                    <div className='container'>
+                        <TransactionsTable data={transactions} isLoading={isLoading} currentAccount={currentAccount} debug={debug} />
+                    </div>
                 </>)}
         </div>
     )

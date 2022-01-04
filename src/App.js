@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { Route, Routes, useNavigate } from 'react-router-dom';
 
 //apis
-import { filterDFKTransactions, getTransactions } from './api/TransactionAPI';
+import { getTransactions } from './api/TransactionAPI';
 import { checkIfWalletIsConnected } from './api/WalletAPI';
 
 // pages
@@ -13,6 +13,7 @@ import Transactions from './Pages/Transactions/Transactions';
 import Header from './components/Header/Header';
 import DebugRow from './components/DebugRow';
 import PrivateRoute from './components/PrivateRoute';
+import { About } from './Pages/About';
 
 function App() {
   let navigate = useNavigate();
@@ -74,16 +75,18 @@ function App() {
 
   return (
     <div className="App">
-      <Header currentAccount={currentAccount} isLoading={isLoading} connectWallet={connectWallet} />
-      {debug && <DebugRow status={status} currentAccount={currentAccount} connectWallet={connectWallet} buttonText={buttonText} filterDFKTransactions={filterDFKTransactions} transactions={transactions} />}
+      <Header currentAccount={currentAccount} isLoading={isLoading} connectWallet={connectWallet} setCurrentAccount={setCurrentAccount} />
+      {debug && <DebugRow status={status} currentAccount={currentAccount} connectWallet={connectWallet} buttonText={buttonText} transactions={transactions} />}
       <Routes>
-        <Route exact path="/" element={<Home connectWallet={connectWallet} buttonText={buttonText} />} />
+        <Route exact path="/" element={<Home connectWallet={connectWallet} buttonText={buttonText} setCurrentAccount={setCurrentAccount} />} />
+
+        <Route exact path="/about" element={<About />} />
 
         <Route
           path="transactions"
           element={
             <PrivateRoute currentAccount={currentAccount} >
-              <Transactions currentAccount={currentAccount} isLoading={isLoading} status={status} connectWallet={connectWallet} buttonText={buttonText} filterDFKTransactions={filterDFKTransactions} transactions={transactions} />
+              <Transactions currentAccount={currentAccount} isLoading={isLoading} setTransactions={setTransactions} debug={debug} transactions={transactions} />
             </PrivateRoute>
           }
         />
@@ -92,7 +95,7 @@ function App() {
           path="taxabletransactions"
           element={
             <PrivateRoute currentAccount={currentAccount} >
-              <Transactions currentAccount={currentAccount} status={status} connectWallet={connectWallet} getData={getData} buttonText={buttonText} filterDFKTransactions={filterDFKTransactions} transactions={transactions} />
+              <Transactions currentAccount={currentAccount} status={status} connectWallet={connectWallet} getData={getData} buttonText={buttonText} transactions={transactions} />
             </PrivateRoute>
           }
         /> */}

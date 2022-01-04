@@ -2,8 +2,6 @@ import { getAddress } from "@harmony-js/crypto";
 
 let currentAccount = '';
 let message = '';
-const testAccount = "one1ydzt66wcuyxwawqxwh3splecf32zw7gsx52hdu";
-const testAccount2 = "0x4f4871D2aC73a7Af211080539B01071961c19A84";
 
 export const checkIfWalletIsConnected = async (debug = false) => {
     try {
@@ -16,7 +14,7 @@ export const checkIfWalletIsConnected = async (debug = false) => {
         }
         const accounts = await ethereum.request({ method: "eth_accounts" });
         if (accounts.length !== 0) {
-            const account = debug ? testAccount : accounts[0];
+            const account = accounts[0];
             //set the current account
             currentAccount = getAddress(account).bech32;
             message = `Got account: ${currentAccount}`;

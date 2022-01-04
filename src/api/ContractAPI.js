@@ -157,7 +157,7 @@ export function getLocationFromContractName(contractName) {
             location = 'Hero';
             break;
         default:
-            location = null;
+            location = contractName;
             break;
     }
     return location;
