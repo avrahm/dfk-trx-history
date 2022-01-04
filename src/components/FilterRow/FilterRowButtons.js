@@ -13,16 +13,12 @@ function FilterRowButtons({ filterOptions, setFilterOptions, setTransactions, tr
     function applyFilter() {
         const copyTransactions = [...allTransactions];
         if (filterOptions.date) {
-            const startDateFilter = moment(filterOptions.date.startDate).unix();
-            const endDateFilter = moment(filterOptions.date.endDate).unix();
             const getFilteredTransactions = copyTransactions.filter(transaction => {
-                console.log(startDateFilter, transaction.timestamp, endDateFilter);
                 if (filterOptions.date) {
                     return transaction.timestamp >= moment(filterOptions.date.startDate).unix() && transaction.timestamp <= moment(filterOptions.date.endDate).unix();
                 }
                 return true;
             })
-            console.log(getFilteredTransactions);
             setTransactions(getFilteredTransactions);
         }
         else {

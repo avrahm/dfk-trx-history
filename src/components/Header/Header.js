@@ -1,8 +1,16 @@
+import { useState } from 'react';
 import dfkHeaderLogo from '../../assets/images/defi-kingdoms-logo.png'
-import Account from '../Account/Account';
 import './Header.css';
 
-function Header({ currentAccount, isLoading, setIsLoading, connectWallet }) {
+function Header({ currentAccount, setCurrentAccount, isLoading, setIsLoading, connectWallet }) {
+
+    const [walletAddress, setWalletAddress] = useState(currentAccount);
+
+    const handelSubmit = (e) => {
+        e.preventDefault();
+        setCurrentAccount(walletAddress);
+    }
+
     return (
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
             <div className="container-fluid">
@@ -14,19 +22,27 @@ function Header({ currentAccount, isLoading, setIsLoading, connectWallet }) {
                 </button>
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+
+                        {/* <li className="nav-item">
+                            <a className="nav-link" rel="noreferrer" href="https://dfkbookkeeper.com" target='_blank'>DFKBookkeeper.com</a>
+                        </li> */}
                         <li className="nav-item">
-                            <a className="nav-link" href="/transactions" target='_self'>Transaction History</a>
+                            <a className="nav-link" rel="noreferrer" href="/about" target='_self'>About</a>
                         </li>
+
+
                         <li className="nav-item">
-                            <a className="nav-link" href="/taxabletrx" target='_self'>Taxable Transactions</a>
-                        </li>
-                        <li className="nav-item">
-                            <a className="nav-link" rel="noreferrer" href="https://game.defikingdoms.com" target='_blank'>Go to the Kingdoms</a>
+                            <a className="nav-link" rel="noreferrer" href="https://game.defikingdoms.com" target='_blank'>Go to the Kingdom</a>
                         </li>
                     </ul>
-                    <form className="d-flex">
-                        {currentAccount ? <Account account={currentAccount} /> : <button className='btn' onClick={connectWallet}>Connect Wallet</button>}
-                    </form>
+                    {currentAccount && (
+                        <form className="d-flex" onSubmit={(e) => handelSubmit(e)}>
+                            <input className="form-control me-2" type="search" placeholder={currentAccount}
+                                value={walletAddress} onChange={(e) => setWalletAddress(e.target.value)}
+                                aria-label="Search" />
+                            <button className="btn btn-outline-success">Search</button>
+                        </form>
+                    )}
                 </div>
             </div>
         </nav>
