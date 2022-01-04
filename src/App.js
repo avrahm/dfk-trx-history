@@ -22,7 +22,7 @@ function App() {
   const [currentAccount, setCurrentAccount] = useState("");
   const [transactions, setTransactions] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [buttonText, setButtonText] = useState("Connect Wallet");
+  const [buttonText, setButtonText] = useState("Connect Wallet with MetaMask");
   const [status, setStatus] = useState("");
 
   const connectWallet = async () => {
