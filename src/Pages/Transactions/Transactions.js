@@ -10,7 +10,7 @@ function Transactions({ isLoading, transactions, currentAccount, setTransactions
             {isLoading ? <Loading /> :
                 (!transactions.length || !currentAccount) ? (
                     <div className="container">No transactions found<hr />
-                        <a href='https://game.defikingdoms.com' target='_blank' rel="noreferrer" className="btn">Head to DeFi Kingdoms to get started</a>
+                        Head to DeFi Kingdoms to get started <a href='https://game.defikingdoms.com' target='_blank' rel="noreferrer" className="btn">Play DFK <i class="fas fa-external-link-alt"></i></a>
                     </div>
                 ) :
                     (<>

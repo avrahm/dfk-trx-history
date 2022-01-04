@@ -6,7 +6,7 @@ import './Header.css';
 
 function Header({ currentAccount, setCurrentAccount, isLoading, setIsLoading, connectWallet }) {
 
-    const [walletAddress, setWalletAddress] = useState(currentAccount);
+    const [walletAddress, setWalletAddress] = useState(currentAccount || '');
 
     const handelSubmit = (e) => {
         e.preventDefault();
@@ -31,17 +31,17 @@ function Header({ currentAccount, setCurrentAccount, isLoading, setIsLoading, co
                             <a className="nav-link" rel="noreferrer" href="/#/about" target='_self'>About</a>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link" rel="noreferrer" href="https://game.defikingdoms.com" target='_blank'>Go to the Kingdom</a>
+                            <a className="nav-link" rel="noreferrer" href="https://game.defikingdoms.com" target='_blank'>Play DFK <i class="fas fa-external-link-alt"></i> </a>
                         </li>
                     </ul>
-                    {currentAccount && (
-                        <form className="d-flex" onSubmit={(e) => handelSubmit(e)}>
-                            <input className="form-control me-2" type="search" placeholder={currentAccount}
-                                value={walletAddress} onChange={(e) => setWalletAddress(e.target.value)}
-                                aria-label="Search" />
-                            <button className="btn btn-outline-success">Search</button>
-                        </form>
-                    )}
+
+                    <form className="d-flex" onSubmit={(e) => handelSubmit(e)}>
+                        <input className="form-control me-2" type="search" placeholder={currentAccount || 'Wallet Address (0x/one...)'}
+                            value={walletAddress} onChange={(e) => setWalletAddress(e.target.value)}
+                            aria-label="Search" />
+                        <button className="btn btn-outline-success">Search</button>
+                    </form>
+
                 </div>
             </div>
         </nav>
