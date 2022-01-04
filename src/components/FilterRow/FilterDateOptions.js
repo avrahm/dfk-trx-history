@@ -14,15 +14,16 @@ const DateRange = ({ filterOptions, setFilterOptions }) => {
     const endDate = filterOptions.date ? filterOptions.date.endDate : '';
 
     return (
-        <div className='filter-date-range col'>
-            <div className='row'>
+        <div className='filter-date-range row'>
+            <div className='p-1 col-md-6'>
                 Start
                 <DatePicker selected={startDate} onChange={(date) => setFilterOptions({
                     ...filterOptions, date: {
                         ...filterOptions.date, startDate: date
                     }
                 })} />
-            </div><div className='row'>
+            </div>
+            <div className='p-1 col-md-6'>
                 End
                 <DatePicker selected={endDate} onChange={(date) => setFilterOptions({
                     ...filterOptions, date: {
@@ -76,21 +77,23 @@ function FilterDateOptions({ filterOptions, setFilterOptions }) {
     }, [filterOptions.dateSelection]);
 
     return (
-        <div className='filter-date-options col'>
-            <div className="dropdown">
-                <button className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                    {title}
-                </button>
-                <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                    <li className="dropdown-item" onClick={() => selectDateDropdown('All')}>All</li>
-                    <li className="dropdown-item" onClick={() => selectDateDropdown('3 Months')}>3 Months</li>
-                    <li className="dropdown-item" onClick={() => selectDateDropdown('6 Months')}>6 Months</li>
-                    <li className="dropdown-item" onClick={() => selectDateDropdown('Custom')}>Custom</li>
-                </ul>
+        <div className='filter-date-options row'>
+            <div className='col col-md-6 d-flex justify-content-center'>
+                <div className="dropdown">
+                    <button className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                        {title}
+                    </button>
+                    <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                        <li className="dropdown-item" onClick={() => selectDateDropdown('All')}>All</li>
+                        <li className="dropdown-item" onClick={() => selectDateDropdown('3 Months')}>3 Months</li>
+                        <li className="dropdown-item" onClick={() => selectDateDropdown('6 Months')}>6 Months</li>
+                        <li className="dropdown-item" onClick={() => selectDateDropdown('Custom')}>Custom</li>
+                    </ul>
+                </div>
             </div>
             {
                 title !== 'All' && (
-                    <div className='col'>
+                    <div className='col col-md-6  d-flex justify-content-center'>
                         <DateRange filterOptions={filterOptions} setFilterOptions={setFilterOptions} />
                     </div>
                 )

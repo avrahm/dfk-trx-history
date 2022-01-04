@@ -8,12 +8,18 @@ function Transactions({ isLoading, transactions, currentAccount, setTransactions
     return (
         <div>
             {isLoading ? <Loading /> :
-                (<>
-                    <FilterRow setTransactions={setTransactions} transactions={transactions} />
-                    <div className='container'>
-                        <TransactionsTable data={transactions} isLoading={isLoading} currentAccount={currentAccount} debug={debug} />
+                (!transactions.length || !currentAccount) ? (
+                    <div className="container">No transactions found<hr />
+                        <a href='https://game.defikingdoms.com' target='_blank' rel="noreferrer" className="btn">Head to DeFi Kingdoms to get started</a>
                     </div>
-                </>)}
+                ) :
+                    (<>
+                        <FilterRow setTransactions={setTransactions} transactions={transactions} />
+                        <div className='container'>
+                            <TransactionsTable data={transactions} isLoading={isLoading} currentAccount={currentAccount} debug={debug} />
+                        </div>
+                    </>)
+            }
         </div>
     )
 }

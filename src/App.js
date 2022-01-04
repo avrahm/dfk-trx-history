@@ -44,12 +44,16 @@ function App() {
   async function getData() {
     if (currentAccount) {
       setIsLoading(true);
-      navigate('/transactions');
-      const { data = [], loading, message, code } = await getTransactions(currentAccount);
+      const { data = [], message, code } = await getTransactions(currentAccount);
       if (code === 200) {
+        navigate('/transactions');
         setStatus(message);
         setTransactions(data);
-        setIsLoading(loading);
+        setIsLoading(false);
+      } else {
+        navigate('/');
+        setStatus(message);
+        setIsLoading(false);
       }
     }
   }
@@ -91,14 +95,6 @@ function App() {
           }
         />
 
-        {/* <Route
-          path="taxabletransactions"
-          element={
-            <PrivateRoute currentAccount={currentAccount} >
-              <Transactions currentAccount={currentAccount} status={status} connectWallet={connectWallet} getData={getData} buttonText={buttonText} transactions={transactions} />
-            </PrivateRoute>
-          }
-        /> */}
 
       </Routes>
     </div>

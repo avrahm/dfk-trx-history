@@ -73,16 +73,9 @@ export const getTransactions = async (account, debug = false) => {
         return { data: [], loading: false, message: "MetaMask not installed!", code: 500 };
     } else {
         try {
-            if (debug) {
-                const response = await fetch('/testTransactions.json')
-                const data = await response.json();
-                return { data: data, loading: false, message: "Data received!", code: 200 };
-            }
-            else {
-                const response = await hmyv2_getTransactionsHistory(account);
-                const data = await response.data.result.transactions;
-                return { data: data, loading: false, message: "Data received!", code: 200 };
-            }
+            const response = await hmyv2_getTransactionsHistory(account);
+            const data = await response.data.result.transactions;
+            return { data: data, loading: false, message: "Data received!", code: 200 };
         } catch (error) {
             return { data: [], loading: false, message: "Error getting data!", code: 500 };
         }
